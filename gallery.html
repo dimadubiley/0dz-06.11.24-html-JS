@@ -1,0 +1,123 @@
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="icon" href="./images/next.jpg">
+	<title>dz</title>
+	<style>
+		body {
+			transition: all ease-in-out 0.3s;
+		}
+
+		.container {
+			text-align: center;
+			padding-top: 30px;
+		}
+
+		img {
+			border: 3px solid #ccc;
+			margin: 10px;
+			cursor: pointer;
+		}
+
+		button {
+			border: none;
+			border-radius: 5px;
+
+			padding: 15px;
+
+			margin-left: 500px;
+		}
+	</style>
+</head>
+
+<body>
+	<button onclick="replaseBgColor()">Смена темы</button>
+
+	<div class="container">
+		<img src="images/back.jpg" class="button" onclick="nextOrbeforeImg(false)" />
+		<img src="images/i1.jpg" name="1" onclick="openImage(this)" />
+		<img src="images/i2.jpg" name="2" onclick="openImage(this)" />
+		<img src="images/i3.jpg" name="3" onclick="openImage(this)" />
+		<img src="images/next.jpg" class="button" onclick="nextOrbeforeImg(true)" />
+	</div>
+
+	<div class="container">
+		<img src="images/back.jpg" class="button" onclick="a(false)" />
+		<img style="cursor:default;" src="images/i1_big.jpg" name="big" />
+		<img src="images/next.jpg" class="button" onclick="a(true)" />
+	</div>
+
+	<script>
+		function openImage(pic) {
+			document.images["big"].src = "images/i" + pic.name + "_big.jpg";
+		}
+
+		function nextOrbeforeImg(flag) {
+			if (flag) {
+				if (document.images[3].name == 9) {
+					for (var i = 1; i <= 3; i++) {
+						document.images[i].name = i;
+						document.images[i].src = "images/i" + i + ".jpg";
+					}
+				}
+				else {
+					for (var i = 1; i <= 3; i++) {
+						document.images[i].name = parseInt(document.images[i].name) + 3;
+						document.images[i].src = "images/i" + document.images[i].name + ".jpg";
+					}
+				}
+			}
+			else {
+				if (document.images[1].name == 1) {
+					for (var i = 1; i <= 3; i++) {
+						document.images[i].name = i + 6;
+						document.images[i].src = "images/i" + (i + 6) + ".jpg";
+					}
+				}
+				else {
+					for (var i = 1; i <= 3; i++) {
+						document.images[i].name = parseInt(document.images[i].name) - 3;
+						document.images[i].src = "images/i" + document.images[i].name + ".jpg";
+					}
+				}
+			}
+		}
+
+		let i = 1;
+		function a(flag) {
+			if (flag) {
+				if (i >= 9) {
+					i = 1;
+				}
+				else {
+					i++;
+				}
+			}
+			else {
+				if (i <= 1) {
+					i = 9;
+				}
+				else {
+					i--;
+				}
+			}
+			document.images["big"].src = `images/i${i}_big.jpg`;
+		}
+
+		function replaseBgColor() {
+			if (document.body.style.backgroundColor === "rgb(255, 255, 255)") {
+				document.body.style.backgroundColor = "#333";
+				document.body.style.color = "#fff";
+			}
+			else {
+				document.body.style.backgroundColor = "#fff";
+				document.body.style.color = "#000";
+			}
+		}
+
+	</script>
+
+</body>
+
+</html>
